@@ -3,56 +3,42 @@ import dev.robocode.tankroyale.botapi.events.*;
 import dev.robocode.tankroyale.botapi.graphics.Color;
 
 // ------------------------------------------------------------------
-// lamaisonoire
+// lanaisonoire
 // ------------------------------------------------------------------
-// A sample bot original made for Robocode by Mathew Nelson.
+// A sample bot original made for Robocode by Kea Mothapo
 //
 // Continuously moves in a circle while firing at maximum power when
 // detecting enemies.
 // ------------------------------------------------------------------
-public class lamaisonoire extends Bot {
+public class lanaisonoire extends Bot {
 
     // The main method starts our bot
     public static void main(String[] args) {
-        new lamaisonoire().start();
+        new lanaisonoire().start();
     }
 
     // Called when a new round is started -> initialize and do some movement
     @Override
     public void run() {
-        setBodyColor(Color.BLUE);
-        setTurretColor(Color.BLUE);
-        setRadarColor(Color.BLACK);
-        setScanColor(Color.YELLOW);
+        setBodyColor(Color.PURPLE);
+        setTurretColor(Color.PURPLE);
+        setRadarColor(Color.PURPLE);
+        setScanColor(Color.PURPLE);
 
         // Repeat while the bot is running
         while (isRunning()) {
             // Tell the game that when we take move, we'll also want to turn right... a lot
-            setTurnRight(10_000);
+            setTurnRight(20_000);
             // Limit our speed to 5
-            setMaxSpeed(5);
+            setMaxSpeed(10);
             // Start moving (and turning)
-            forward(10_000);
+            forward(8_000);
         }
     }
 
     // We scanned another bot -> fire hard!
     @Override
     public void onScannedBot(ScannedBotEvent e) {
-        fire(3);
-    }
-
-    // We hit another bot -> if it's our fault, we'll stop turning and moving,
-    // so we need to turn again to keep spinning.
-    @Override
-    public void onHitBot(HitBotEvent e) {
-        var direction = directionTo(e.getX(), e.getY());
-        var bearing = calcBearing(direction);
-        if (bearing > -10 && bearing < 10) {
-            fire(3);
-        }
-        if (e.isRammed()) {
-            turnRight(10);
-        }
+        fire(5);
     }
 }
